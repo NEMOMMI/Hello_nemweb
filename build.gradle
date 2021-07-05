@@ -24,8 +24,10 @@ repositories {
     mavenCentral()
 }
 
+//그레이들 버전4에서 설정
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
