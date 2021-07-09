@@ -42,10 +42,4 @@ public class Posts {
         this.content = content;
     }
 
-    //112
-//    public void update(String title, String content) {
-//        this.title = title;
-//        this.content = content;
-//    }
-
 }
