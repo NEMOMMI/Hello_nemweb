@@ -1,5 +1,6 @@
 package com.nemWeb.domain.posts;
 
+import com.nemWeb.web.dto.PostsListResponseDto;
 import com.nemWeb.web.dto.PostsResponseDto;
 import com.nemWeb.web.dto.PostsSaveRequestDto;
 import com.nemWeb.web.dto.PostsUpdateRequestDto;
@@ -7,6 +8,11 @@ import com.nemWeb.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+//148
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,4 +41,11 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
+    //148
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new) //람다식
+                .collect(Collectors.toList());
+    }
 }
