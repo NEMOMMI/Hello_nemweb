@@ -1,5 +1,6 @@
 package com.nemWeb.web;
 
+import com.nemWeb.config.auth.LoginUser;
 import com.nemWeb.config.auth.dto.SessionUser;
 import com.nemWeb.domain.posts.PostsService;
 import com.nemWeb.web.dto.PostsResponseDto;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
@@ -18,14 +18,10 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-
-        //190
-        SessionUser user = (SessionUser)httpSession.getAttribute("user");
 
         if(user != null) {
             model.addAttribute("userName", user.getName());
@@ -34,12 +30,13 @@ public class IndexController {
         return "index";
     }
 
+    //save
     @GetMapping("/posts/save")
     public String postsSave() {
         return "posts-save";
     }
 
-    //155
+    //update(155)
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
