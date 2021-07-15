@@ -41,5 +41,8 @@ dependencies {
     //jdbc
     compile('org.springframework.session:spring-session-jdbc')
 
+    //test
+    testCompile("org.springframework.security:spring-security-test")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
